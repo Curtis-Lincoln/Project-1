@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
       
       - name: Get Date
@@ -19,18 +19,18 @@ jobs:
         shell: bash
       
       - name: Cache Buildozer global directory
-        uses: actions/cache@v4
+        uses: actions/cache@v2
         with:
           path: .buildozer_global
           key: buildozer-global-${{ hashFiles('buildozer.spec') }} # Replace with your path
       
-      - uses: actions/cache@v4
+      - uses: actions/cache@v2
         with:
           path: .buildozer
           key: ${{ runner.os }}-${{ steps.get-date.outputs.date }}-${{ hashFiles('buildozer.spec') }}
       
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v4
+        uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
           command: buildozer android debug
