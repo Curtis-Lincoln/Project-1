@@ -1,0 +1,2456 @@
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import Factory kivy.factory.Factory
+<MyDropDown@DropDown>:
+    max_height: 435
+
+<MyPopup@Popup>:
+    auto_dismiss: True
+    size_hint: 0.6, 0.85
+    pos_hint: {"x": 0.2, "top": 0.9}
+    title: "Forgot Your Password"
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDLabel:
+            text: "Email"
+            font_size: 20
+            color: 1,1,1,1
+
+        MDTextField: 
+            id: Email
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 20
+            mode: "round"
+            padding_x: 10
+
+        MDLabel:
+            text: "Username"
+            font_size: 20
+            color: 1,1,1,1
+
+        MDTextField: 
+            id: User
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 20
+            mode: "round"
+            padding_x: 10
+
+        Button:
+            text: "Recieve Code"
+            font_size: 20
+            on_release: app.CheckDetails(root)
+
+        MDLabel:
+            text: "Code"
+            font_size: 20
+            color: 1,1,1,1
+
+        MDTextField: 
+            id: Code
+            hint_text: "Type Code"
+            #icon_right: "eye-off"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 20
+            mode: "round"
+            padding_x: 10
+            disabled: True
+        
+        Button:
+            id: CodeButton
+            text: "Check Code"
+            font_size: 20
+            disabled: True
+            on_release: app.CheckCode(root)
+
+        MDLabel:
+            text: "Password"
+            font_size: 20
+            color: 1,1,1,1
+
+        MDTextField: 
+            id: Pwd
+            hint_text: "New Password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 20
+            mode: "round"
+            padding_x: 10
+            disabled: True
+        
+        Button: 
+            id: Submit
+            text: "Submit"
+            font_size: 20
+            disabled: True
+            on_release: app.ChangePassword(root)
+
+        Button: 
+            text: "Close"
+            font_size: 20
+            on_release: root.dismiss()
+
+
+        MDLabel: 
+            id: ErrorMessage
+            text: ""
+            font_size: 20
+            color: 1,1,1,1
+        
+
+
+        
+
+
+
+
+<InputAndButton>:
+    spacing: 15
+    
+    MDTextField:
+        id: Title 
+        hint_text: "Title"
+        height: 25
+        width: 850
+        size_hint_x: None
+        mode: "round"
+    
+    MDRaisedButton:
+        id: Submit
+        text: "Submit"
+        on_release: 
+            root.addset()
+            app.addvalues("CreateSelection")
+
+    
+<Demo1>:
+    MDCard:
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+
+           
+        MDLabel:
+            id: signup_label
+            text: "LOGIN"
+            font_size: 45
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_x: 10
+
+        MDLabel:
+            id: username_label
+            text: "USERNAME"
+            font_size: 30
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 10
+            padding_x: 10
+        
+        MDTextField:
+            id: user_field
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 30
+            mode: "round"
+            padding_x: 10
+
+        MDLabel:
+            id: password_label
+            text: "PASSWORD"
+            font_size: 30
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_x: 10
+
+        MDTextField:
+            id: password_field
+            hint_text: "Password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 30
+            password: True
+            mode: "round"
+    
+        MDBoxLayout: 
+            orientation: "horizontal"
+            padding: [0,-25]
+
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                on_active: app.show_password_login(*args)
+                
+
+            MDLabel: 
+                id: password_text
+                text: "Show Password"
+        MDLabel: 
+            id: Error
+            text: ""
+            font_size: 30
+            
+        MDLabel:
+            id: forgotpassword_label
+            text: "FORGOT YOUR PASSWORD"
+            font_size: 45
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 10
+            padding_x: 10
+
+
+        MDFillRoundFlatButton:
+            text: "FORGOT YOUR PASSWORD"
+            font_size: 40
+            padding_x: 20
+            on_release: Factory.MyPopup().open()
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: 40
+            padding: [0,-50]
+
+            MDFillRoundFlatButton:
+                text: "LOGIN"
+                font_size: 40
+                pos_hint: {"center_x": 0.5}
+                halign: "center"
+                on_release: 
+                    app.login()
+                    root.manager.transition.direction = "left"
+
+                
+
+
+            MDFillRoundFlatButton:
+                text: "CLEAR"
+                font_size: 40
+                pos_hint: {"center_x": 0.5}
+                halign: "center"
+                on_press: app.clear("Login")
+
+
+        MDScreen:
+
+            MDSmartTile: 
+                pos: (1100, 100)
+                size_hint: None, None
+                size: "400dp", "400dp"
+                source: "C:/Users/curti/Login.JPG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+
+            MDLabel:
+                id: SignUp_label
+                text: "DON'T HAVE AN ACCOUNT"
+                font_size: 45
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: 100
+                padding_x: 10
+                pos_hint: {"center_x": 0.82}
+                halign: "center"
+
+
+            MDFillRoundFlatButton:
+                text: "SIGN UP"
+                font_size: 36
+                pos_hint: {"center_x": 0.82}
+                halign: "center"
+                on_release:
+                    app.clear("SignUp") 
+                    root.manager.current = "SignUp"
+                    root.manager.transition.direction = "left"
+
+<Demo2>:
+    MDCard:
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+
+        MDLabel:
+            id: signup_label
+            text: "WELCOME SIGN UP"
+            font_size: 45
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 10
+            padding_x: 10
+
+        
+        MDLabel:
+            id: username_label
+            text: "EMAIL"
+            font_size: 40
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 10
+            padding_x: 10
+        
+        MDTextField:
+            id: Email_textfield
+            hint_text: "Email"
+            icon_right: "email"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 30
+            mode: "round"
+            padding_x: 10
+            
+
+        MDLabel:
+            id: username_label
+            text: "USERNAME"
+            font_size: 40
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_y: 5
+            padding_x: 10
+
+        MDLabel:
+            text: "Username must be between 1 and 30 characters, containing no spaces"
+        
+        MDTextField:
+            id: user_textfield
+            hint_text: "Username"
+            icon_right: "account"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 30
+            mode: "round"
+            padding_x: 10
+
+        MDLabel:
+            id: password_label
+            text: "PASSWORD"
+            font_size: 40
+            size_hint_y: None
+            height: self.texture_size[1]
+            padding_x: 10
+        
+        MDLabel:
+            text: "Password must contain at least 1 capital letter, special character \n and number, being between 12 and 30 characters in length"
+            font_size: 20
+
+        MDTextField:
+            id: password_textfield
+            hint_text: "Password"
+            icon_right: "eye-off"
+            size_hint_x: None
+            width: 750
+            height: 25
+            font_size: 30
+            password: True
+            mode: "round"
+
+        MDBoxLayout:
+            orinetation: "horizontal"
+            padding: [0,-25]
+
+            MDCheckbox:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                on_active: app.show_password_signup(*args)
+                
+
+            MDLabel: 
+                id: checkbox
+                text: "Show Password"
+
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: 75
+            padding: [0,-50]
+
+            MDFillRoundFlatButton:
+                text: "SIGN UP"
+                font_size: 35
+                pos_hint: {"center_x": 0.5}
+                halign: "center"
+                on_release: 
+                    app.clear("Login")
+                    app.signup()
+                    root.manager.transition.direction = "right"
+                
+
+
+            MDFillRoundFlatButton:
+                text: "CLEAR"
+                font_size: 35
+                pos_hint: {"center_x": 0.5}
+                halign: "center"
+                on_press: app.clear("SignUp")
+
+            MDFillRoundFlatButton:
+                text: "BACK"
+                font_size: 35
+                pos_hint: {"center_x": 0.5}
+                halign: "center"
+                on_press: 
+                    app.clear("Login")
+                    root.manager.current = "Login"
+                    root.manager.transition.direction = "right"
+
+            MDLabel: 
+                id: Error
+                text: ""
+                font_size: 30
+                
+        MDScreen:
+            MDSmartTile: 
+                pos: (1100, 235)
+                size_hint: None, None
+                size: "320dp", "320dp"
+                source: "C:/Users/curti/SignUp.JPEG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+
+            MDLabel:
+                id: SignUp_label
+                text: "CONFIRM PASSWORD"
+                font_size: 45
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: 200
+                pos_hint: {"center_x": 0.67}
+                halign: "center"
+
+            MDTextField:
+                id: confirm_password
+                hint_text: "Confirm Password"
+                icon_right: "eye-off"
+                size_hint_x: None
+                width: 750
+                height: 25
+                font_size: 30
+                password: True
+                mode: "round"
+                pos_hint: {"center_x": 0.75}
+                pos:(1000,100)
+
+<Demo3>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+                
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("Account")
+                        root.manager.transition.direction = "left"
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: 
+                        app.searchclear("Account")
+                        app.ClearAccount()
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Account")
+                        app.ClearAccount()
+
+                MDFillRoundFlatButton:
+                    id: Account
+                    text: "Account"
+                    font_size: 25
+                    disabled: True
+             
+
+        MDLabel: 
+            text: "Account Page"
+            font_size: 40
+            style: "elevated"
+            size_hint_x: 0.25
+            pos_hint: {"center_x": 0.4}
+            
+
+        MDLabel:
+            id: User
+            text: ""
+            font_size: 40
+            style: "elevated"
+            size_hint_x: 0.25
+            pos_hint: {"center_x": 0.4} 
+            
+
+        MDBoxLayout: 
+            orientation: "horizontal"
+            pos_hint: {"center_x": 0.78}
+            spacing: 50
+            padding: [0,-10]
+
+            MDTextField:
+                id: NewUsername
+                hint_text: "Change Username"
+                size_hint_x: None
+                width: 750
+                font_size: 30
+                mode: "round"
+            
+            MDFillRoundFlatButton:
+                text: "Confirm"
+                font_size: 25
+                style: "elevated"
+                on_release: app.UpdateUsername()
+
+            MDFillRoundFlatButton:
+                text: "Clear"
+                font_size: 25
+                style: "elevated"
+                on_release:
+                    root.ids.NewUsername.text = ""
+
+        MDLabel:
+            id: "Password"
+            text: "Change Password:"
+            font_size: 40
+            style: "elevated"
+            size_hint_x: 0.25
+            pos_hint: {"center_x": 0.4}
+
+        MDBoxLayout: 
+            orientation: "horizontal"
+            pos_hint: {"center_x": 0.78}
+            spacing: 50
+            
+            MDTextField:
+                id: NewPassword
+                hint_text: "Change Password"
+                size_hint_x: None
+                width: 750
+                height: 30
+                font_size: 30
+                mode: "round"
+            
+            MDFillRoundFlatButton:
+                text: "Confirm"
+                font_size: 25
+                style: "elevated"
+                on_release: app.UpdatePassword()
+
+            MDFillRoundFlatButton:
+                text: "Clear"
+                font_size: 25
+                style: "elevated"
+                on_release:
+                    root.ids.NewPassword.text = ""
+
+        MDLabel:
+            id: Email
+            text: ""
+            font_size: 40
+            style: "elevated"
+            size_hint_x: 0.25
+            pos_hint: {"center_x": 0.4}
+                    
+ 
+
+        MDBoxLayout: 
+            orientation: "horizontal"
+            pos_hint: {"center_x": 0.78}
+            spacing: 50
+            padding: [0,-20]
+            
+            MDTextField:
+                id: NewEmail
+                hint_text: "Change Email"
+                size_hint_x: None
+                width: 750
+                height: 30
+                font_size: 30
+                mode: "round"
+            
+            MDFillRoundFlatButton:
+                text: "Confirm"
+                font_size: 25
+                style: "elevated" 
+                on_release: app.UpdateEmail()
+
+            MDFillRoundFlatButton:
+                text: "Clear"
+                font_size: 25
+                style: "elevated"
+                on_release:
+                    root.ids.NewEmail.text = ""
+
+        MDLabel:
+            id: Error
+            text: ""
+            font_size: 25
+            pos_hint: {"center_x": 0.8}
+                      
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-25]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.searchclear("Account")
+                    app.ClearAccount()
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("LearnSelection")
+                    app.searchclear("Account")
+                    app.ClearAccount()
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    app.addvalues("CreateSelection")
+                    root.manager.transition.direction = "left"
+                    app.searchclear("Account")
+                    app.ClearAccount()
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                disabled: False
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("Progress")
+                    app.searchclear("Account")
+                    app.ClearAccount()
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+<Demo4>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("CreateNotes")
+                        root.manager.transition.direction = "left"
+                        app.ClearFlashcard()
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("CreateNotes")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("CreateNotes")
+                        app.ClearFlashcard()
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    font_size: 25
+                    on_release: 
+                        app.showdetails()
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("CreateNotes")
+                        app.ClearFlashcard()
+
+        MDLabel:
+            text: ""
+            font_size: 50
+            pos_hint: {"center_x":.4}
+
+        BoxLayout:
+            padding: [500,-200]
+            orientation: "vertical"
+
+            TextInput:
+                id: Title
+                hint_text: "Title of Flashcard"
+                size_hint: 1.6, 0.5
+                multiline: False
+                font_size: 34
+                canvas.before: 
+                    Color: 
+                        rgba: (0,0,0,1)
+                    Line: 
+                        width: 1.5
+                        rectangle: self.x, self.y, self.width, self.height
+            
+            TextInput:
+                id: Notes
+                hint_text: "Notes"
+                size_hint: 1.6, 3.5
+                font_size: 25
+                canvas.before: 
+                    Color: 
+                        rgba: (0,0,0,1)
+                    Line: 
+                        width: 1.5
+                        rectangle: self.x, self.y, self.width, self.height
+
+            BoxLayout:
+                orientation: "horizontal"
+                spacing: 50
+                padding: [0,20]
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 30
+                    on_release: app.clear("CreateNotes")
+
+                MDFillRoundFlatButton:
+                    id: FlipCard
+                    text: "Flip Card"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.FlipCardCreate()
+
+                MDFillRoundFlatButton:
+                    text: "Save"
+                    font_size: 30
+                    on_release: app.save()
+
+                MDFillRoundFlatButton:
+                    text: "Add New"
+                    font_size: 30
+                    on_release: 
+                        app.save()
+                        app.check("AddNew")
+                        app.addvalues("CreateSelection")
+                        root.manager.transition.direction = "right"
+                        app.searchclear("CreateNotes")
+                        app.ClearFlashcard()
+
+                MDFillRoundFlatButton:
+                    text: "Finish"
+                    font_size: 30
+                    on_release: 
+                        app.save()
+                        app.check("Finish")
+                        root.manager.transition.direction = "left"
+                        app.searchclear("CreateNotes")
+                        app.ClearFlashcard()
+
+                MDFillRoundFlatButton:
+                    text: "Back"
+                    font_size: 30
+                    on_release: 
+                        app.back()
+                        root.manager.transition.direction = "right"
+                        app.searchclear("CreateNotes")
+                        app.ClearFlashcard()
+
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-25]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.searchclear("CreateNotes")
+                    app.ClearFlashcard()
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    app.addvalues("LearnSelection")
+                    root.manager.transition.direction = "left"
+                    app.searchclear("CreateNotes")
+                    app.ClearFlashcard()
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    app.addvalues("CreateSelection")
+                    root.manager.transition.direction = "left"
+                    app.searchclear("CreateNotes")
+                    app.ClearFlashcard()
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("Progress")
+                    app.searchclear("CreateNotes")
+                    app.ClearFlashcard()
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+                
+<Demo5>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("CreateSelection")
+                        root.manager.transition.direction = "left"
+                       
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("CreateSelection")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("CreateSelection")
+                      
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    font_size: 25
+                    on_release: 
+                        app.showdetails()
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("CreateSelection")
+                      
+
+        MDBoxLayout:
+            orientation: "vertical" 
+            padding: [0,-25]
+
+            MDLabel: 
+                text: "Create Flashcards"
+                font_size: 35
+                style: "elevated"
+                size_hint_x: 0.25
+                pos_hint: {"center_x": 0.4}
+
+            MDLabel:
+                id: click_label
+                text: "Pick the flashcard set below"
+                font_size: 25
+                pos_hint: {"center_x": 0.78}
+
+            Spinner:
+                id: spinner_id
+                size_hint: 0.7, None
+                pos_hint: {"center_x": 0.62}
+                dropdown_cls: "MyDropDown"
+                text: "Flashcard Set"
+                values: []
+                size_hint_y: None
+                height: 50
+
+                on_text: app.spinner_clicked("CreateSelection", spinner_id.text)
+            
+        BoxLayout:
+            id: box
+            orientation: "horizontal"
+            spacing: 15
+            padding: [500,0]
+
+            MDRaisedButton:
+                id: Create
+                text: "Create New"
+                disabled: False
+                on_release: app.addtextinput()
+        
+        MDLabel:
+            text: "By selecting the Q&A format, this allows you to type infomation on both the front and back of the flashcard. Question on one side, answer on the other."
+            font_size: 30
+            size_hint_x: 0.75
+            pos_hint: {"center_x": 0.64}
+
+        MDLabel:
+            text: "By selecting the Notes format, this allows you to type infomation on the front of the flashcard, in any format you want."
+            font_size: 30
+            size_hint_x: 0.72
+            pos_hint: {"center_x": 0.63}
+        
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: 20
+            padding: [750,0]
+
+            MDFillRoundFlatIconButton:
+                id: Easy
+                text: "Easy Question"
+                icon: "close"
+                on_release: app.Select("Easy")
+
+            MDFillRoundFlatIconButton:
+                id: Medium
+                text: "Medium Question"
+                icon: "close"
+                on_release: app.Select("Medium")
+
+            MDFillRoundFlatIconButton:
+                id: Hard
+                text: "Hard Question"
+                icon: "close"
+                on_release: app.Select("Hard")
+
+
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: 150
+            padding: [750, 0]
+
+            MDRaisedButton:
+                text: "Q&A Format"
+                font_size: 40
+                size_hint_x: 0.25
+                on_release: 
+                    app.Format(0)
+                    root.manager.transition.direction = "left"
+                    app.searchclear("CreateSelection")
+
+            MDRaisedButton:
+                text: "Notes Format"
+                font_size: 40
+                size_hint_x: 0.25
+                on_release: 
+                    app.Format(1)
+                    root.manager.transition.direction = "left"
+                    app.searchclear("CreateSelection")
+            
+                    
+        
+        MDLabel:
+            id: Error
+            text: ""
+            font_size: 30
+            pos_hint: {"center_x": 0.8}
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-25]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.searchclear("CreateSelection")
+                    
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("LearnSelection")
+                    app.searchclear("CreateSelection")
+                    
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                disabled: True
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("Progress")
+                    app.searchclear("CreateSelection")
+                    
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+               
+               
+<Demo6>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("Help")
+                        root.manager.transition.direction = "left"
+                        app.ClearHelp()
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("Help")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    disabled: True
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    on_release: 
+                        app.showdetails()
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Help")
+                        app.ClearHelp()
+        
+        MDLabel:
+            text: "Help Page"
+            font_size: 45
+            pos_hint: {"center_x": 0.8}
+            
+
+        MDBoxLayout: 
+            orientation: "vertical"
+            padding: [500,0]
+
+            ScrollView:
+                size_hint: 1.4, 4.5
+                MDList:
+                    OneLineIconListItem:
+                        id: item1
+                        text: "Change Username"
+                        on_release: app.press(self, "item1")
+                        IconLeftWidget:
+                            id: Iconitem1
+                            icon: "minus"
+                    OneLineIconListItem:
+                        id: item2
+                        text: "Change Password"
+                        on_release: app.press(self, "item2")
+                        IconLeftWidget:
+                            id: Iconitem2
+                            icon: "minus"                    
+                    OneLineIconListItem:
+                        id: item3
+                        text: "Change Email"
+                        on_release: app.press(self, "item3")
+                        IconLeftWidget:
+                            id: Iconitem3
+                            icon: "minus"
+                    OneLineIconListItem:
+                        id: item4
+                        text: "Create Flashcard"
+                        on_release: app.press(self, "item4")
+                        IconLeftWidget:
+                            id: Iconitem4
+                            icon: "minus"
+                    OneLineIconListItem:
+                        id: item5
+                        text: "Learn Flashcard Set"
+                        on_release: app.press(self, "item5")
+                        IconLeftWidget:
+                            id: Iconitem5
+                            icon: "minus"
+                    OneLineIconListItem:
+                        id: item6
+                        text: "Edit Flashcard Set"
+                        on_release: app.press(self, "item6")
+                        IconLeftWidget:
+                            id: Iconitem6
+                            icon: "minus"
+
+                    OneLineIconListItem:
+                        id: item7
+                        text: "Check Progress"
+                        on_release: app.press(self, "item7")
+                        IconLeftWidget:
+                            id: Iconitem7
+                            icon: "minus"
+                
+        MDLabel:
+            id: helpbox
+            text: ""
+            font_size: 30
+            pos_hint: {"center_x": 0.62}
+            size_hint: 0.65,3.5
+            spacing: 50
+            halign: 'left'
+            valign: 'top'
+            canvas.before: 
+                Color: 
+                    rgba: (0,0,0,1)
+                Line: 
+                    width: 1.1
+                    rectangle: self.x, self.y, self.width, self.height
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-20]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.searchclear("Help")
+                    app.ClearHelp()
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("LearnSelection")
+                    app.searchclear("Help")
+                    app.ClearHelp()
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("CreateSelection")
+                    app.searchclear("Help")
+                    app.ClearHelp()
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("Progress")
+                    app.searchclear("Help")
+                    app.ClearHelp()
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+           
+<Demo7>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("Home")
+                        root.manager.transition.direction = "left"
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("Home")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Home")
+
+                MDFillRoundFlatButton:
+                    id: Account
+                    text: "Account"
+                    font_size: 25
+                    on_release:
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.showdetails()
+                        app.searchclear("Home")
+                      
+
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            padding: [600,125]
+            spacing: 25
+            size_hint_x: 1.3
+
+            MDLabel: 
+                text: "Home Page"
+                font_size: 50
+                style: "elevated"
+                
+
+            MDLabel: 
+                text: "Latest Activity"
+                font_size: 50
+                style: "elevated"
+        
+
+        MDBoxLayout: 
+            orientation: "horizontal"
+            padding: [500, -200]
+            spacing: 100
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "300dp", "300dp"
+                source: "C:/Users/curti/HomePage.PNG" 
+                radius: [dp(32), dp(32)]
+                overlap: False
+                box_color: 1,1,1,1
+
+            MDBoxLayout: 
+                orientation: "vertical"
+                spacing: 50
+                padding: [0, 100]
+
+                MDRaisedButton: 
+                    id: Recent1
+                    text: ""
+                    font_size: 40
+                    style: "elevated"
+                    size_hint_x: 3.3
+                    disabled: False
+                    on_release: 
+                        app.GoToSet(0)
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Home")
+
+                MDRaisedButton:
+                    id: Recent2
+                    text: ""
+                    font_size: 40
+                    style: "elevated"
+                    size_hint_x: 3.3
+                    disabled: False
+                    on_release: 
+                        app.GoToSet(1)
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Home")
+                    
+
+                MDRaisedButton:
+                    id: Recent3 
+                    text: ""
+                    font_size: 40
+                    style: "elevated"
+                    size_hint_x: 3.3
+                    disabled: False
+                    on_release: 
+                        app.GoToSet(2)
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Home")
+    
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-25]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                disabled: True
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("LearnSelection")
+                    app.searchclear("Home")
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("CreateSelection")
+                    app.searchclear("Home")
+
+            MDRaisedButton:
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("Progress")
+                    app.searchclear("Home")
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+<Demo8>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("LearnNotes")
+                        app.close()
+                        root.manager.transition.direction = "left"
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("LearnNotes")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("LearnNotes")
+                        app.close()
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    font_size: 25
+                    on_release: 
+                        app.showdetails()
+                        app.close()
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("LearnNotes")
+
+        MDLabel:
+            text: ""
+            font_size: 50
+            pos_hint: {"center_x":.4}
+
+
+        BoxLayout:
+            padding: [500,-200]
+            orientation: "vertical"
+
+            MDLabel:
+                id: Title
+                text: ""
+                text_size: self.size
+                size_hint: 1.6, 0.5
+                multiline: False
+                font_size: 34
+                canvas.before: 
+                    Color: 
+                        rgba: (0,0,0,1)
+                    Line: 
+                        width: 1.5
+                        rectangle: self.x, self.y, self.width, self.height
+                
+            
+            MDLabel:
+                id: Notes
+                text: ""
+                text_size: self.size
+                halign: 'left'
+                valign: 'top'
+                size_hint: 1.6, 3.5
+                font_size: 25
+                canvas.before: 
+                    Color: 
+                        rgba: (0,0,0,1)
+                    Line: 
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            BoxLayout:
+                orientation: "horizontal"
+                spacing: 65
+                padding: [0,20]
+
+                MDFillRoundFlatButton:
+                    id: Previous
+                    text: "Previous"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.Previous("LearnNotes")
+
+                MDFillRoundFlatIconButton:
+                    id: FlagButton 
+                    text: "Flag"
+                    font_size: 30
+                    icon: "close"
+                    on_release: app.Flag()
+
+                MDFillRoundFlatIconButton:
+                    id: LearntButton
+                    text: "Learnt"
+                    font_size: 30
+                    icon: "close"
+                    on_release: app.Learnt()
+
+                MDFillRoundFlatButton:
+                    id: Flip
+                    text: "Flip Card"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.FlipCardLearn("LearnNotes")
+
+                MDFillRoundFlatButton:
+                    id: Next
+                    text: "Next"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.Next("LearnNotes")
+
+                MDFillRoundFlatButton:
+                    text: "Back"
+                    font_size: 30
+                    on_release: 
+                        app.close()
+                        root.manager.current = "LearnSelection"
+                        root.manager.transition.direction = "right"
+                        app.searchclear("LearnNotes")
+
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-25]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.close()
+                    app.searchclear("LearnNotes")
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.close()
+                    app.addvalues("LearnSelection")
+                    app.searchclear("LearnNotes")
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("CreateSelection")
+                    app.close()
+                    app.searchclear("LearnNotes")
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    app.addvalues("Progress")
+                    root.manager.transition.direction = "left"
+                    app.close()
+                    app.searchclear("LearnNotes")
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+<Demo9>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("LearnSelection")
+                        root.manager.transition.direction = "left"
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("LearnSelection")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("LearnSelection")
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    on_release:
+                        app.showdetails() 
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("LearnSelection")
+        
+        MDBoxLayout: 
+            orientation: "vertical"
+            padding: [500,0]
+
+            MDLabel:
+                text: "Flashcard Sets"
+                font_size: 50
+
+            MDLabel:
+                id: click_label
+                text: "Pick the flashcard set below"
+                font_size: 30
+            
+            Spinner:
+                id: spinner_id
+                size_hint: 1.6, None
+                dropdown_cls: "MyDropDown"
+                text: "Flashcard Set"
+                values: []
+                size_hint_y: 0.8
+
+                on_text: app.spinner_clicked("LearnSelection", spinner_id.text)
+
+            MDLabel: 
+                text: ""
+
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: [0,-200]
+                spacing: 25
+
+                MDFillRoundFlatButton:
+                    text: "Learn Set"
+                    font_size: 30
+                    on_release: 
+                        app.other_class.loadnotes("LearnNotes", "")
+                        root.manager.transition.direction = "left"
+                        app.searchclear("LearnSelection")
+
+                MDFillRoundFlatButton:
+                    text: "Edit Set"
+                    font_size: 30
+                    on_release: 
+                        app.loadnotes("Edit", "")
+                        root.manager.transition.direction = "left"
+                        app.searchclear("LearnSelection")
+
+                MDFillRoundFlatButton:
+                    text: "Delete Set"
+                    font_size: 30
+                    on_release: 
+                        app.deleteset()
+                        app.addvalues("LearnSelection")
+                        app.addvalues("CreateSelection")
+                        app.searchclear("LearnSelection")
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 50
+                padding: [0,-250]
+
+                MDFillRoundFlatButton:
+                    text: "View Learnt Cards"
+                    font_size: 30
+                    on_release: 
+                        root.manager.transition.direction = "left"
+                        app.loadnotes("","Learnt")
+                        app.searchclear("LearnSelection")
+
+                MDFillRoundFlatButton:
+                    text: "View Flagged Cards"
+                    font_size: 30
+                    on_release: 
+                        root.manager.transition.direction = "left"
+                        app.loadnotes("","Flagged")
+                        app.searchclear("LearnSelection")
+        
+        MDBoxLayout:
+            orientation: "horizontal"
+            padding: [500, -125]
+            spacing: 25
+
+            MDFillRoundFlatButton: 
+                text: "View Easy Qs"
+                font_size: 30
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.loadnotes("","Easy")
+                    app.searchclear("LearnSelection")
+
+            MDFillRoundFlatButton: 
+                text: "View Medium Qs"
+                font_size: 30
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.loadnotes("","Medium")
+                    app.searchclear("LearnSelection")
+
+            MDFillRoundFlatButton: 
+                text: "View Hard Qs"
+                font_size: 30
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.loadnotes("","Hard")
+                    app.searchclear("LearnSelection")
+                
+            
+                
+                 
+
+
+
+                
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-20]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    app.LatestActivity()
+                    app.searchclear("LearnSelection")
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                disabled: True
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    app.addvalues("CreateSelection")
+                    app.searchclear("LearnSelection")
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    app.addvalues("Progress")
+                    app.searchclear("LearnSelection")
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+
+
+
+           
+<Demo10>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("Progress")
+                        root.manager.transition.direction = "left"
+                        
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("Progress")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Progress")
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    on_release:
+                        app.showdetails() 
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Progress")
+
+        MDBoxLayout:
+            orientation: "vertical"
+            padding: [500, 0]
+
+            MDLabel:
+                text: "Progress Page"
+                font_size: 40
+
+            MDLabel:
+                id: click_label
+                text: "Pick the flashcard set below"
+                font_size: 30
+            
+            Spinner:
+                id: spinner_id
+                size_hint: 1.6, None
+                dropdown_cls: "MyDropDown"
+                text: "Flashcard Set"
+                values: []
+                size_hint_y: 0.8
+
+                on_text: app.spinner_clicked("Progress", spinner_id.text)
+
+            MDLabel:
+                text: ""
+
+
+            MDBoxLayout:
+                orientation: "vertical"
+                padding: [50, -200]
+                spacing: 30
+
+
+                MDRaisedButton:
+                    text: "Percentaged Viewed"
+                    font_size: 50
+                    on_release:
+                        app.PlotGraph1() 
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Progress")
+                        
+                MDRaisedButton:
+                    text: "Percentaged Flagged"
+                    font_size: 50
+                    on_release: 
+                        app.PlotGraph2()
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Progress")
+
+                MDRaisedButton:
+                    text: "Percentaged Learnt"
+                    font_size: 50
+                    on_release: 
+                        app.PlotGraph3()
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Progress")
+    
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-20]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.searchclear("Progress")
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("LearnSelection")
+                    app.searchclear("Progress")
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("CreateSelection")
+                    app.searchclear("Progress")
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                disabled: True
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+
+<Demo11>:
+    BoxLayout:
+        orientation: "vertical"
+
+        Graph:
+            id: box
+
+        MDBoxLayout: 
+            size_hint_y: .2
+            orinetation: "horizontal"
+
+            MDBoxLayout: 
+                orientation: "vertical"
+
+                MDLabel:
+                    id: Highest
+                    text: ""
+                    font_size: 25
+
+                MDLabel:
+                    id: Lowest
+                    text: ""
+                    font_size: 25
+
+                MDLabel:
+                    id: Average
+                    text: ""
+                    font_size: 25
+
+            MDBoxLayout: 
+                orientation: "vertical"
+
+                MDLabel:
+                    id: Session1
+                    text: ""
+                    font_size: 20
+
+                MDLabel:
+                    id: Session2
+                    text: ""
+                    font_size: 20
+
+                MDLabel:
+                    id: Session3
+                    text: ""
+                    font_size: 20
+
+                MDLabel:
+                    id: Session4
+                    text: ""
+                    font_size: 20            
+
+                MDLabel:
+                    id: Session5
+                    text: ""
+                    font_size: 20
+
+            MDBoxLayout: 
+                orientation: "vertical"
+
+                MDLabel:
+                    id: Session6
+                    text: ""
+                    font_size: 20
+
+                MDLabel:
+                    id: Session7
+                    text: ""
+                    font_size: 20
+
+                MDLabel:
+                    id: Session8
+                    text: ""
+                    font_size: 20
+
+                MDLabel:
+                    id: Session9
+                    text: ""
+                    font_size: 20            
+
+                MDLabel:
+                    id: Session10
+                    text: ""
+                    font_size: 20
+
+            Button:
+                text: "Back"
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "right"
+
+    
+#<Graph>:
+    #id: box
+
+<Demo12>:
+    MDCard: 
+        size_hint: None, None
+        size: 1800, 800
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        elevation: 10
+        padding: 25
+        spacing: 25
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: ""
+            md_bg_color: 0,1,0,1
+            pos: [100,100]
+
+            MDBoxLayout: 
+                orientation: "horizontal"
+                spacing: 40
+                padding: [0,25]
+                
+                MDTextField:
+                    id: searchbar
+                    hint_text: "Search Set"
+                    width: 300
+                    height: 25
+                    font_size: 30
+                    mode: "round"
+                    pos_hint: {"center_x": 0.5}
+
+                MDFillRoundFlatButton:
+                    text: "Search"
+                    font_size: 25
+                    on_release: 
+                        app.search("Edit")
+                        root.manager.transition.direction = "left"
+
+                MDFillRoundFlatButton:
+                    text: "Clear"
+                    font_size: 25
+                    on_release: app.searchclear("Edit")
+
+                MDFillRoundFlatButton:
+                    text: "Help"
+                    font_size: 25
+                    on_release: 
+                        root.manager.current = "Help"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Edit")
+
+                MDFillRoundFlatButton:
+                    text: "Account"
+                    font_size: 25
+                    on_release: 
+                        app.showdetails()
+                        root.manager.current = "Account"
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Edit")
+
+        MDLabel:
+            text: ""
+            font_size: 50
+            pos_hint: {"center_x":.4}
+
+
+        BoxLayout:
+            padding: [500,-200]
+            orientation: "vertical"
+
+            MDLabel:
+                id: Title
+                text: ""
+                text_size: self.size
+                size_hint: 1.6, 0.5
+                multiline: False
+                font_size: 34
+                canvas.before: 
+                    Color: 
+                        rgba: (0,0,0,1)
+                    Line: 
+                        width: 1.5
+                        rectangle: self.x, self.y, self.width, self.height
+                
+            
+            MDLabel:
+                id: Notes
+                text: ""
+                text_size: self.size
+                halign: 'left'
+                valign: 'top'
+                size_hint: 1.6, 3.5
+                font_size: 25
+                canvas.before: 
+                    Color: 
+                        rgba: (0,0,0,1)
+                    Line: 
+                        width: 1.1
+                        rectangle: self.x, self.y, self.width, self.height
+
+            BoxLayout:
+                orientation: "horizontal"
+                spacing: 65
+                padding: [0,20]
+
+                MDFillRoundFlatButton:
+                    id: Previous
+                    text: "Previous"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.Previous("Edit")
+
+                MDFillRoundFlatButton:
+                    id: EditButton 
+                    text: "Edit"
+                    font_size: 30
+                    on_release: 
+                        app.EditFlashcard()
+                        root.manager.transition.direction = "left"
+                        app.searchclear("Edit")
+                        
+
+                MDFillRoundFlatButton:
+                    id: DeleteButton
+                    text: "Delete"
+                    font_size: 30
+                    on_release: 
+                        app.DeleteFlashcard()
+                        app.Next("Edit")
+
+                MDFillRoundFlatButton:
+                    id: Flip
+                    text: "Flip Card"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.FlipCardLearn("Edit")
+
+                MDFillRoundFlatButton:
+                    id: Next
+                    text: "Next"
+                    font_size: 30
+                    disabled: False
+                    on_release: app.Next("Edit")
+
+                MDFillRoundFlatButton:
+                    text: "Back"
+                    font_size: 30
+                    on_release: 
+                        root.manager.current = "LearnSelection"
+                        root.manager.transition.direction = "right"
+                        app.searchclear("Edit")
+
+
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: 10
+            padding: [0,-25]
+
+            MDRaisedButton: 
+                text: "Home Page"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Home"
+                    root.manager.transition.direction = "left"
+                    app.LatestActivity()
+                    app.searchclear("Edit")
+
+            MDRaisedButton: 
+                text: "Learn Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "LearnSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("LearnSelection")
+                    app.searchclear("Edit")
+
+            MDRaisedButton: 
+                text: "Create Flashcards"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "CreateSelection"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("CreateSelection")
+                    app.searchclear("Edit")
+
+            MDRaisedButton: 
+                text: "Progress"
+                font_size: 40
+                style: "elevated"
+                size_hint_x: 0.25
+                on_release: 
+                    root.manager.current = "Progress"
+                    root.manager.transition.direction = "left"
+                    app.addvalues("Progress")
+                    app.searchclear("Edit")
+
+            MDSmartTile: 
+                size_hint: None, None
+                size: "220dp", "220dp"
+                source: "C:/Users/curti/Logo.PNG" 
+                radius: [dp(24), dp(24)]
+                overlap: False
+                box_color: 1,1,1,1
+                pos_hint: {"center_x": 0.1}
+    
+
+
+
+
+        
+
+
+                
